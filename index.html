@@ -1,140 +1,1290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="script.js"></script>
-    <script src="planet.js"></script>
-    <script src="starry-background.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   <!--For the scrool in animation-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aasharya Bhandari</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f0;
+      --gray: #888;
+      --light: #e8e8e3;
+      --accent: #0a0a0a;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+      --sans: 'Space Grotesk', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+      background: rgba(245,245,240,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #ddd;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+
+    /* ─── PAGES ─── */
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding-top: 64px;
+    }
+    .page.active { display: block; }
+
+    /* ─── HOME ─── */
+    #home {
+      display: none;
+      flex-direction: column;
+    }
+    #home.active {
+      display: flex;
+    }
+
+    .home-hero {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px);
+    }
+
+    .hero-left {
+      padding: 5rem 3rem 3rem 3rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      border-right: 1px solid #ddd;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(5rem, 8vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-name em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      display: block;
+      margin-top: 0.2em;
+    }
+
+    .hero-desc {
+      margin-top: auto;
+      padding-top: 3rem;
+    }
+
+    .hero-desc p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      max-width: 380px;
+    }
+
+    .hero-right {
+      padding: 5rem 3rem 3rem 3rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .stat-item {
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+
+    .stat-num {
+      font-family: var(--display);
+      font-size: 3.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 0.4rem;
+    }
+
+    .hero-links {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-black {
+      background: var(--black); color: var(--white);
+    }
+    .btn-black:hover { background: #333; }
+
+    .btn-outline {
+      border: 1px solid var(--black); color: var(--black);
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    .ticker {
+      background: var(--black); color: var(--white);
+      padding: 0.7rem 0; overflow: hidden;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .ticker-inner {
+      display: flex; gap: 4rem;
+      animation: ticker 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .ticker-sep { color: var(--gray); }
+
+    /* ─── RESEARCH PAGE ─── */
+    .page-header {
+      padding: 4rem 3rem 2rem;
+      border-bottom: 1px solid #ddd;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+
+    .page-title {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      line-height: 0.9;
+    }
+
+    .page-subtitle {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-count {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gray);
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .research-card {
+      padding: 3rem;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .research-card:nth-child(even) { border-right: none; }
+
+    .research-card:hover { background: #f0f0eb; }
+
+    .research-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .research-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .research-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid #ddd;
+      color: var(--gray);
+    }
+
+    .tag.active-tag {
+      background: var(--black); color: var(--white); border-color: var(--black);
+    }
+
+    .research-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .research-supervisor {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── PROJECTS PAGE ─── */
+    .projects-list { padding: 0; }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: start;
+      padding: 2.5rem 3rem;
+      border-bottom: 1px solid #ddd;
+      gap: 2rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .project-row:hover { background: #f0f0eb; }
+
+    .proj-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gray);
+      padding-top: 0.25rem;
+    }
+
+    .proj-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .proj-desc {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .proj-tags {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem;
+    }
+
+    .proj-lang {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      background: #eee;
+      padding: 0.2rem 0.5rem;
+      color: #555;
+    }
+
+    .proj-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    /* ─── LECTURES / VIDEOS ─── */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 0;
+    }
+
+    .video-cell {
+      padding: 2.5rem 3rem;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .video-cell:nth-child(even) { border-right: none; }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--black);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      border: none;
+    }
+
+    .video-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .video-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.6;
+      font-family: var(--mono);
+    }
+
+    /* ─── NOTES ─── */
+    .notes-upload-area {
+      margin: 2rem 3rem;
+      border: 1.5px dashed #ccc;
+      padding: 3rem;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .notes-upload-area:hover {
+      border-color: var(--black);
+      background: #f8f8f3;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .upload-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .upload-label span {
+      color: var(--black);
+      border-bottom: 1px solid var(--black);
+      cursor: pointer;
+    }
+
+    #pdf-input { display: none; }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0;
+      padding: 0 3rem 3rem;
+    }
+
+    .note-card {
+      border: 1px solid #ddd;
+      margin: 0.5rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      background: white;
+    }
+
+    .note-card:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .note-card:hover .note-size { color: #aaa; }
+
+    .note-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .note-name {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      word-break: break-word;
+    }
+
+    .note-size {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    .note-del {
+      position: absolute; top: 0.75rem; right: 0.75rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 0.75rem; color: #ccc;
+      opacity: 0; transition: opacity 0.2s;
+    }
+
+    .note-card:hover .note-del { opacity: 1; color: #aaa; }
+
+    .pdf-viewer {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,10,10,0.95);
+      display: none; flex-direction: column;
+    }
+
+    .pdf-viewer.open { display: flex; }
+
+    .pdf-viewer-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .pdf-viewer-title {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: #aaa;
+      letter-spacing: 0.1em;
+    }
+
+    .pdf-close {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: none; border: 1px solid #555;
+      color: #aaa; padding: 0.4rem 1rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+
+    .pdf-close:hover { border-color: white; color: white; }
+
+    .pdf-viewer embed {
+      flex: 1; border: none;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px - 100px);
+    }
+
+    .about-left {
+      padding: 4rem 3rem;
+      border-right: 1px solid #ddd;
+    }
+
+    .about-right {
+      padding: 4rem 3rem;
+    }
+
+    .about-bio {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #222;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-bio em { color: var(--gray); }
+
+    .skills-section h3 {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+
+    .skills-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .skill-chip {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--black); color: var(--white);
+    }
+
+    .timeline { padding: 0; }
+
+    .timeline-item {
+      padding: 1.5rem 0;
+      border-top: 1px solid #ddd;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1.5rem;
+    }
+
+    .timeline-year {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+      padding-top: 0.2rem;
+    }
+
+    .timeline-content h4 {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid #ddd;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .footer-name {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .footer-links {
+      display: flex; gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--black); }
+
+    /* ─── HOME RESEARCH HIGHLIGHTS ─── */
+    .home-research {
+      margin-bottom: 2rem;
+      border-top: 1px solid #ddd;
+      padding-top: 1.25rem;
+    }
+    .home-research-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+    .home-research-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .home-research-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #ccc; flex-shrink: 0; margin-top: 0.35rem;
+    }
+    .active-dot { background: var(--black); }
+    .home-research-title {
+      display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .home-research-meta {
+      display: block; font-family: var(--mono); font-size: 0.6rem;
+      color: var(--gray); letter-spacing: 0.05em;
+    }
+
+    /* ─── CV PAGE ─── */
+    .cv-page {
+      padding: 3rem;
+      max-width: 700px;
+    }
+    .cv-download-block {
+      border: 1.5px solid var(--black);
+      padding: 3rem;
+      margin-bottom: 3rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    }
+    .cv-download-info h3 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .cv-download-info p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+    .cv-note {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--gray);
+      line-height: 1.8;
+      border-top: 1px solid #ddd;
+      padding-top: 1.5rem;
+    }
+    .cv-note strong { color: var(--black); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .home-hero, .research-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; border-bottom: 1px solid #ddd; padding: 3rem 1.5rem 2rem; }
+      .hero-right { padding: 2rem 1.5rem; }
+      .page-header { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .project-row { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .proj-num { display: none; }
+      .video-cell { padding: 2rem 1.5rem; }
+      .videos-grid { grid-template-columns: 1fr; }
+      .research-card { border-right: none !important; }
+      .about-left { border-right: none; border-bottom: 1px solid #ddd; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem; }
+    }
+
+    /* ─── TRANSITIONS ─── */
+    .page { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
 </head>
 <body>
 
+<nav>
+  <a href="#" class="nav-logo" onclick="showPage('home')">AB</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" data-page="home" class="active">Index</a></li>
+    <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
+    <li><a href="#" onclick="showPage('research')" data-page="research">Research</a></li>
+    <li><a href="#" onclick="showPage('projects')" data-page="projects">Projects</a></li>
+    <li><a href="#" onclick="showPage('lectures')" data-page="lectures">Lectures</a></li>
+    <li><a href="#" onclick="showPage('notes')" data-page="notes">Notes</a></li>
+    <li><a href="#" onclick="showPage('cv')" data-page="cv">CV</a></li>
+  </ul>
+</nav>
 
-    <div class="starry-bg"></div>
-
-
-    <nav class="navbar">
-       
-           <!-- Hamburger Icon -->
-    <div class="hamburger" id="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
+<!-- ═══════════════ HOME ═══════════════ -->
+<div id="home" class="page active">
+  <div class="home-hero">
+    <div class="hero-left">
+      <div>
+        <p class="hero-tag">Physics · High Energy · Kathmandu, Nepal</p>
+        <h1 class="hero-name">
+          AASHARYA<br>BHANDARI
+          <em>physicist.</em>
+        </h1>
+      </div>
+      <div class="hero-desc">
+        <p>BSc Physics, St. Xavier's College — Tribhuvan University. 2nd Year Class Topper (81.08%). Working on plasma simulations, mountain snow dynamics, and high-energy particle physics.</p>
+      </div>
     </div>
-    
-        <ul class="nav-links">
-            <li> <div class="navbar-logo">
-                <i class="fa-solid fa-cat">Quantum</i> <!-- You can change this icon -->
-             </div></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#Education">Education</a></li>
-            <li><a href="#Courses">Courses</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#blogs">Blogs</a></li>
-            <li><a href="#Activity">Activity</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li> <div class="cool-icon">
-                <i class="fa-solid fa-atom"></i>
-                <span>Explore</span>
-            </div></li>
-        </ul>
-        <!-- Cool icon addition -->
-       
-    </nav>
-    
-    <section id="welcome">
-        <div class="welcome-container">
-            <div class="welcome-text">
-                <h1>Hello, I'm <span class="highlight">Aasharya</span></h1>
-                <p>
-                    A physics student at Tribhuvan University with a passion for <br>
-                    <strong>physics</strong>, <strong>biology</strong>,play with<br>
-                    <strong>computer science</strong> to explore these fields.
-                </p>
-            </div>
-            <div class="physics-animation">
-                <div class="particle orbit"></div>
-                <div class="particle orbit"></div>
-                <div class="particle orbit"></div>
-            </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">81%</div>
+          <div class="stat-label">2nd Year Score<br>Class Topper</div>
         </div>
-    </section>
-
-
-    <section class="projects">
-    <h2>My Projects</h2>
-    <div class="project-card">
-      <div class="project-image">
-        <a href="https://github.com/yourusername/project1" target="_blank">
-          <img src="project1.jpg" alt="Project 1">
-          <span class="link-icon">👁️</span>
-        </a>
-      </div>
-      <div class="project-details">
-        <h3>Project Name 1</h3>
-        <p class="language"><em>Python, JavaScript</em></p>
-        <p class="description">This is a brief description of the project. It showcases what the project does and its purpose.</p>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-image">
-        <a href="https://kaggle.com/yourusername/project2" target="_blank">
-          <img src="project2.jpg" alt="Project 2">
-          <span class="link-icon">👁️</span>
-        </a>
-      </div>
-      <div class="project-details">
-        <h3>Project Name 2</h3>
-        <p class="language"><em>R, SQL</em></p>
-        <p class="description">This is another project description. It highlights the key features and technologies used.</p>
-      </div>
-    </div>
-
-    <!-- Add more project cards as needed -->
-  </section>
-
-
-    
-
-
-  
-    
-
-    
-    
-
-    <section id="contact">
-        <h2 class ="contact-heading" data-aos="fade-up" >Contact</h2>
-        <h1 class="background-text" data-aos="fade-up" >CONTACT</h1>
-        <div class="contact-grid" data-aos="fade-up">
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <p class="contact-value">Bhandariaasharya@gmail.com</p>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone-alt"></i>
-                <p class="contact-value">+977 9843221804</p>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <p class="contact-value">Balkumar,Lalitpur,Nepal</p>
-            </div>
+        <div class="stat-item">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Active Research<br>Projects</div>
         </div>
-    </section>
-    <footer class="bottom">
-        <p>© 2024 Aasharya Bhandari</p>
-    </footer>
+        <div class="stat-item">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Computational<br>Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Awards &<br>Scholarships</div>
+        </div>
+      </div>
+
+      <!-- ══ RESEARCH HIGHLIGHTS ══ -->
+      <div class="home-research">
+        <p class="home-research-label">Selected Research</p>
+        <div class="home-research-item">
+          <span class="home-research-dot active-dot"></span>
+          <div>
+            <span class="home-research-title">Kinetic Trajectory Simulation of Dusty Plasma</span>
+            <span class="home-research-meta">Active · Plasma Physics · MATLAB</span>
+          </div>
+        </div>
+        <div class="home-research-item">
+          <span class="home-research-dot"></span>
+          <div>
+            <span class="home-research-title">Mathematical Modeling of Snow Mountain Dynamics</span>
+            <span class="home-research-meta">2025 · Applied Math · Python</span>
+          </div>
+        </div>
+        <div class="home-research-item">
+          <span class="home-research-dot"></span>
+          <div>
+            <span class="home-research-title">Higgs Invariant Mass — ATLAS Open Data</span>
+            <span class="home-research-meta">HEP · ROOT · RDataFrame</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-links">
+        <a href="https://github.com/AshRay-web/" target="_blank" class="btn btn-black">GitHub ↗</a>
+        <a href="https://www.ashray-web.github.io" target="_blank" class="btn btn-outline">Website ↗</a>
+        <a href="mailto:bhandariaasharya@gmail.com" class="btn btn-outline">Email ↗</a>
+      </div>
+    </div>
+  </div>
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Dusty Plasma Simulation</span><span class="ticker-sep">·</span>
+      <span>High Energy Physics</span><span class="ticker-sep">·</span>
+      <span>ATLAS Open Data</span><span class="ticker-sep">·</span>
+      <span>Higgs Boson</span><span class="ticker-sep">·</span>
+      <span>Quantum Computing</span><span class="ticker-sep">·</span>
+      <span>General Relativity</span><span class="ticker-sep">·</span>
+      <span>MATLAB · Python · ROOT</span><span class="ticker-sep">·</span>
+      <span>Pythia · Geant4</span><span class="ticker-sep">·</span>
+      <span>Dusty Plasma Simulation</span><span class="ticker-sep">·</span>
+      <span>High Energy Physics</span><span class="ticker-sep">·</span>
+      <span>ATLAS Open Data</span><span class="ticker-sep">·</span>
+      <span>Higgs Boson</span><span class="ticker-sep">·</span>
+      <span>Quantum Computing</span><span class="ticker-sep">·</span>
+      <span>General Relativity</span><span class="ticker-sep">·</span>
+      <span>MATLAB · Python · ROOT</span><span class="ticker-sep">·</span>
+      <span>Pythia · Geant4</span><span class="ticker-sep">·</span>
+    </div>
+  </div>
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+    <div class="footer-links">
+      <a href="mailto:bhandariaasharya@gmail.com">bhandariaasharya@gmail.com</a>
+      <a href="tel:+9779843221804">+977 9843221804</a>
+      <a href="#">Balkumari, Lalitpur</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<div id="about" class="page">
+  <div class="page-header">
+    <div>
+      <p class="page-subtitle">Who I am</p>
+      <h2 class="page-title">ABOUT</h2>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="about-left">
+      <p class="about-bio">
+        I'm Aasharya — a physics student obsessed with understanding how the universe works at its most fundamental level. My interests span <em>plasma physics, high-energy particle physics,</em> and the beautiful mathematics underneath it all.
+      </p>
+      <p class="about-bio" style="font-size:1rem; font-family: var(--sans); color: #555; line-height: 1.8;">
+        Currently in my second year at St. Xavier's College under Tribhuvan University, Kathmandu. I work on kinetic trajectory simulations of dusty plasma under Dr. Roshan Chalise, and mathematical modeling of snow-mountain dynamics at Phutung Research Institute. I also make educational physics videos on YouTube and write notes on complex topics.
+      </p>
+
+      <div class="skills-section">
+        <h3>Programming</h3>
+        <div class="skills-row">
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">C / C++</span>
+          <span class="skill-chip">MATLAB</span>
+          <span class="skill-chip">LaTeX</span>
+          <span class="skill-chip">Bash</span>
+        </div>
+
+        <h3>Physics Tools</h3>
+        <div class="skills-row">
+          <span class="skill-chip">ROOT</span>
+          <span class="skill-chip">Pythia</span>
+          <span class="skill-chip">Pandas</span>
+          <span class="skill-chip">Geant4</span>
+          <span class="skill-chip">Matplotlib</span>
+        </div>
+
+        <h3>Systems</h3>
+        <div class="skills-row">
+          <span class="skill-chip">Linux</span>
+          <span class="skill-chip">Git / GitHub</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <h3 style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:1rem;">Timeline</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2025 – now</div>
+          <div class="timeline-content">
+            <h4>Research Intern — Phutung Research Institute</h4>
+            <p>Mathematical modeling of snow accumulation and melting on mountainous terrain. Python-based numerical solvers.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025 – now</div>
+          <div class="timeline-content">
+            <h4>Research — Dusty Plasma (St. Xavier's College)</h4>
+            <p>Kinetic Trajectory Simulation with OML theory. Modified Bohm sheath criterion. Supervisor: Dr. Roshan Chalise.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-content">
+            <h4>Fathers Locke & Stiller Research Award</h4>
+            <p>Awarded at St. Xavier's College for undergraduate research excellence.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-content">
+            <h4>ICTP Physics Without Frontiers</h4>
+            <p>Mini-workshop on particle physics & science communication. Hands-on HEP data analysis.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023–24</div>
+          <div class="timeline-content">
+            <h4>Quantum Computing — The Coding School</h4>
+            <p>2-semester course. Cirq, quantum gates, BB84 protocol encryption project.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2022 – now</div>
+          <div class="timeline-content">
+            <h4>BSc Physics — St. Xavier's College, TU</h4>
+            <p>Top of class, 2nd year: 81.08%. Merit scholarship holder.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+    <div class="footer-links">
+      <a href="mailto:bhandariaasharya@gmail.com">bhandariaasharya@gmail.com</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ RESEARCH ═══════════════ -->
+<div id="research" class="page">
+  <div class="page-header">
+    <div>
+      <p class="page-subtitle">Active & completed</p>
+      <h2 class="page-title">RESEARCH</h2>
+    </div>
+    <span class="page-count">02 projects</span>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <p class="research-num">01</p>
+      <div class="research-meta">
+        <span class="tag active-tag">Active</span>
+        <span class="tag">Plasma Physics</span>
+        <span class="tag">MATLAB</span>
+      </div>
+      <h3 class="research-title">Kinetic Trajectory Simulation of Dusty Plasma</h3>
+      <p class="research-desc">
+        Computing the modified Bohm sheath criterion for dusty plasma and developing MATLAB code to incorporate Orbital Motion Limited (OML) theory. Studying variations in plasma density, particle behavior, and electric potential — comparing trajectories with and without dust particles to showcase the importance of dust effects in KTS modeling.
+      </p>
+      <p class="research-supervisor">Supervisor: Dr. Roshan Chalise — St. Xavier's College, Kathmandu</p>
+      <p class="research-supervisor" style="margin-top:0.25rem;">May 2025 – Present</p>
+    </div>
+
+    <div class="research-card">
+      <p class="research-num">02</p>
+      <div class="research-meta">
+        <span class="tag active-tag">Active</span>
+        <span class="tag">Mathematical Modeling</span>
+        <span class="tag">Python</span>
+      </div>
+      <h3 class="research-title">Mathematical Modeling of Snow Mountain Dynamics</h3>
+      <p class="research-desc">
+        Developing a steady-state mathematical model for snow accumulation and melting on mountainous terrain. Building a Python-based numerical solver to simulate snow-packed mountain dynamics, parameterizing environmental factors including precipitation rate and solar radiation within the model framework.
+      </p>
+      <p class="research-supervisor">Supervisor: Dr. Rijan Maharjan — Phutung Research Institute, Tokha, Kathmandu</p>
+      <p class="research-supervisor" style="margin-top:0.25rem;">Aug–Dec 2025</p>
+    </div>
+  </div>
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+  </footer>
+</div>
+
+<!-- ═══════════════ PROJECTS ═══════════════ -->
+<div id="projects" class="page">
+  <div class="page-header">
+    <div>
+      <p class="page-subtitle">Computational & programming</p>
+      <h2 class="page-title">PROJECTS</h2>
+    </div>
+    <span class="page-count">06 projects</span>
+  </div>
+  <div class="projects-list">
+    <div class="project-row">
+      <span class="proj-num">01</span>
+      <div>
+        <h3 class="proj-title">Higgs Invariant Mass — ATLAS Open Data</h3>
+        <p class="proj-desc">Analyzed ATLAS open data using ROOT RDataFrame to reconstruct and plot the invariant Higgs boson mass from the 4-lepton decay channel.</p>
+        <div class="proj-tags">
+          <span class="proj-lang">ROOT</span><span class="proj-lang">RDataFrame</span><span class="proj-lang">C++</span>
+        </div>
+      </div>
+      <a href="https://github.com/AshRay-web/" target="_blank" class="proj-link">View ↗</a>
+    </div>
+
+    <div class="project-row">
+      <span class="proj-num">02</span>
+      <div>
+        <h3 class="proj-title">Z Boson Invariant Mass — e⁺e⁻ Collisions</h3>
+        <p class="proj-desc">Simulated electron–positron collisions with Pythia and calculated the invariant mass of the Z boson, visualized using ROOT histograms.</p>
+        <div class="proj-tags">
+          <span class="proj-lang">Pythia</span><span class="proj-lang">ROOT</span><span class="proj-lang">Python</span>
+        </div>
+      </div>
+      <a href="https://github.com/AshRay-web/" target="_blank" class="proj-link">View ↗</a>
+    </div>
+
+    <div class="project-row">
+      <span class="proj-num">03</span>
+      <div>
+        <h3 class="proj-title">Deep Neural Network — Boson Decay Classifier</h3>
+        <p class="proj-desc">Built a deep neural network to classify Z boson and Higgs boson decay events from simulated particle collision data.</p>
+        <div class="proj-tags">
+          <span class="proj-lang">Python</span><span class="proj-lang">TensorFlow</span><span class="proj-lang">ROOT</span>
+        </div>
+      </div>
+      <a href="https://github.com/AshRay-web/" target="_blank" class="proj-link">View ↗</a>
+    </div>
+
+    <div class="project-row">
+      <span class="proj-num">04</span>
+      <div>
+        <h3 class="proj-title">Double Pendulum — RK4 Simulation</h3>
+        <p class="proj-desc">Solved the double pendulum differential equations using the Runge-Kutta (RK4) method and created animated visualizations of chaotic motion.</p>
+        <div class="proj-tags">
+          <span class="proj-lang">Python</span><span class="proj-lang">Matplotlib</span><span class="proj-lang">NumPy</span>
+        </div>
+      </div>
+      <a href="https://github.com/AshRay-web/" target="_blank" class="proj-link">View ↗</a>
+    </div>
+
+    <div class="project-row">
+      <span class="proj-num">05</span>
+      <div>
+        <h3 class="proj-title">Proton–Proton Collision Histograms</h3>
+        <p class="proj-desc">Simulated pp collisions with Pythia, analyzed ROOT files, and created histograms to study particle interaction distributions.</p>
+        <div class="proj-tags">
+          <span class="proj-lang">Pythia</span><span class="proj-lang">ROOT</span>
+        </div>
+      </div>
+      <a href="https://github.com/AshRay-web/" target="_blank" class="proj-link">View ↗</a>
+    </div>
+
+    <div class="project-row">
+      <span class="proj-num">06</span>
+      <div>
+        <h3 class="proj-title">ATLAS Detector Simulation — Geant4</h3>
+        <p class="proj-desc">Developed a simulation of the ATLAS detector at CERN using Geant4 to model particle interactions and detector response characteristics.</p>
+        <div class="proj-tags">
+          <span class="proj-lang">Geant4</span><span class="proj-lang">C++</span>
+        </div>
+      </div>
+      <a href="https://github.com/AshRay-web/" target="_blank" class="proj-link">View ↗</a>
+    </div>
+  </div>
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+    <div class="footer-links">
+      <a href="https://github.com/AshRay-web/" target="_blank">All on GitHub ↗</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ LECTURES ═══════════════ -->
+<div id="lectures" class="page">
+  <div class="page-header">
+    <div>
+      <p class="page-subtitle">YouTube · Educational content</p>
+      <h2 class="page-title">LECTURES</h2>
+    </div>
+    <!--
+    UPDATE YOUR CHANNEL LINK BELOW:
+    Replace "https://www.youtube.com/@your-channel" with your actual YouTube channel URL
+    -->
+    <a href="https://www.youtube.com/@your-channel" target="_blank" class="btn btn-black" style="margin-bottom:0.5rem;">Channel ↗</a>
+  </div>
+
+  <!--
+  ═══════════════════════════════════════════════════════════
+  HOW TO ADD / EDIT VIDEOS
+  ─────────────────────────────────────────────────────────
+  To add a new video:
+  1. Go to your YouTube video → Share → Embed → copy the src URL
+     (looks like: https://www.youtube.com/embed/VIDEO_ID?si=...)
+  2. Copy one <div class="video-cell"> block below
+  3. Paste it, update the iframe src, video-title, and video-desc
+  4. Save. Done.
+
+  To remove a video: delete its entire <div class="video-cell">...</div> block.
+  ═══════════════════════════════════════════════════════════
+  -->
+  <div class="videos-grid">
+    <!-- ── VIDEO 1 — update src, title, desc ── -->
+    <div class="video-cell">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/IYKCTiybIA4?si=83c2Ts1l7ENYn_k4"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <!-- UPDATE: change the title and description below -->
+      <h4 class="video-title">Physics Lecture 01</h4>
+      <p class="video-desc">Add your video title and a short description here.</p>
+    </div>
+
+    <!-- ── VIDEO 2 — update src, title, desc ── -->
+    <div class="video-cell">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/XZB7hjmikj4?si=75cyKJ8A19ose61Y"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <!-- UPDATE: change the title and description below -->
+      <h4 class="video-title">Physics Lecture 02</h4>
+      <p class="video-desc">Add your video title and a short description here.</p>
+    </div>
+
+    <!-- ── ADD MORE VIDEOS BY COPYING A BLOCK ABOVE ── -->
+  </div>
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+  </footer>
+</div>
+
+<!-- ═══════════════ NOTES ═══════════════ -->
+<div id="notes" class="page">
+  <div class="page-header">
+    <div>
+      <p class="page-subtitle">PDF study materials</p>
+      <h2 class="page-title">NOTES</h2>
+    </div>
+  </div>
+
+  <!--
+  ═══════════════════════════════════════════════════════════
+  HOW TO ADD NOTES
+  ─────────────────────────────────────────────────────────
+  1. Place your PDF files in the same folder as index.html
+  2. Copy a <div class="note-card"> block below and fill in:
+       data-src  = filename of your PDF (e.g. "quantum.pdf")
+       data-name = display name shown on the card
+       data-desc = short description (course, topic, etc.)
+  3. Save and open index.html — done.
+  ═══════════════════════════════════════════════════════════
+  -->
+
+  <div class="notes-grid" id="notes-grid">
+
+    <!-- ── EXAMPLE NOTE CARD — duplicate this block to add more ── -->
+    <div class="note-card" data-src="notes/example.pdf" data-name="Classical Mechanics" data-desc="Lagrangian & Hamiltonian formulation · SXC">
+      <span class="note-icon">📄</span>
+      <div class="note-name">Classical Mechanics</div>
+      <div class="note-size">Lagrangian & Hamiltonian · SXC</div>
+    </div>
+
+    <!-- ── ADD MORE CARDS HERE ── -->
+
+  </div>
+
+  <div style="padding: 0 3rem 3rem;">
+    <p style="font-family:var(--mono);font-size:0.65rem;color:var(--gray);letter-spacing:0.05em;">
+      Click any note to view it. Files must be in the same folder or a subfolder (e.g. <code>notes/</code>).
+    </p>
+  </div>
+
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+  </footer>
+</div>
+
+<!-- ═══════════════ CV ═══════════════ -->
+<div id="cv" class="page">
+  <div class="page-header">
+    <div>
+      <p class="page-subtitle">Curriculum Vitae</p>
+      <h2 class="page-title">CV</h2>
+    </div>
+  </div>
+
+  <div class="cv-page">
+    <!--
+    ═══════════════════════════════════════════════════════════
+    HOW TO LINK YOUR CV
+    ─────────────────────────────────────────────────────────
+    1. Place your CV PDF in the same folder as index.html
+    2. Set the href below to the filename (e.g. "cv.pdf")
+    3. Update the file size / date text if you like
+    ═══════════════════════════════════════════════════════════
+    -->
+    <div class="cv-download-block">
+      <div class="cv-download-info">
+        <h3>Aasharya Bhandari — CV</h3>
+        <!-- UPDATE filename below: change "CV_AasharyaBhandari.pdf" if your file is named differently -->
+        <p>CV_AasharyaBhandari.pdf · Updated 2025</p>
+      </div>
+      <!-- UPDATE href to match your PDF filename -->
+      <a href="CV_AasharyaBhandari.pdf" download class="btn btn-black">Download ↓</a>
+    </div>
+
+    <div class="cv-note">
+      <strong>What's inside:</strong><br><br>
+      Education — BSc Physics, St. Xavier's College, TU (2022–present)<br>
+      Research — Dusty Plasma KTS · Snow Mountain Modeling<br>
+      Awards — LSRA 2025 · Merit Scholarship · Academic Excellence<br>
+      Courses — ICTP PWF · Intro to GR · Quantum Computing (Qubit×Qubit)<br>
+      Skills — Python · C/C++ · MATLAB · ROOT · Pythia · Geant4 · LaTeX<br>
+      Projects — ATLAS open data · Z boson · DNN classifier · Double pendulum
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-name">© 2025 Aasharya Bhandari</span>
+  </footer>
+</div>
+
+<!-- PDF Viewer Overlay -->
+<div class="pdf-viewer" id="pdf-viewer">
+  <div class="pdf-viewer-bar">
+    <span class="pdf-viewer-title" id="pdf-viewer-title"></span>
+    <button class="pdf-close" onclick="closePdf()">✕ Close</button>
+  </div>
+  <embed id="pdf-embed" src="" type="application/pdf" />
+</div>
+
+<script>
+  // ═══════════════════════════════════════════════════════
+  // NAVIGATION
+  // ═══════════════════════════════════════════════════════
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelector(`[data-page="${id}"]`)?.classList.add('active');
+    window.scrollTo(0, 0);
+    return false;
+  }
+
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); showPage(a.dataset.page); });
+  });
+
+  document.querySelector('.nav-logo').addEventListener('click', e => {
+    e.preventDefault(); showPage('home');
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // NOTES — click a card to open its PDF in the viewer
+  // ═══════════════════════════════════════════════════════
+  document.querySelectorAll('.note-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const src  = card.dataset.src;
+      const name = card.dataset.name || card.querySelector('.note-name')?.textContent;
+      if (src) openPdf(src, name);
+    });
+  });
+
+  function openPdf(src, name) {
+    document.getElementById('pdf-embed').src = src;
+    document.getElementById('pdf-viewer-title').textContent = name || src;
+    document.getElementById('pdf-viewer').classList.add('open');
+  }
+
+  function closePdf() {
+    document.getElementById('pdf-viewer').classList.remove('open');
+    document.getElementById('pdf-embed').src = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePdf(); });
+</script>
 </body>
-
 </html>
