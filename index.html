@@ -48,7 +48,12 @@
       text-transform: uppercase;
       color: var(--black);
       text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
     }
+
+    /* proton collision SVG in nav */
+    .nav-logo svg { width: 28px; height: 16px; }
+    .nav-logo-text { font-size: 0.75rem; letter-spacing: 0.12em; }
 
     .nav-links {
       display: flex; gap: 2.5rem; list-style: none;
@@ -94,6 +99,7 @@
       padding: 5rem 3rem 3rem 3rem;
       display: flex; flex-direction: column; justify-content: space-between;
       border-right: 1px solid #ddd;
+      position: relative;
     }
 
     .hero-tag {
@@ -187,27 +193,7 @@
     }
     .btn-outline:hover { background: var(--black); color: var(--white); }
 
-    .ticker {
-      background: var(--black); color: var(--white);
-      padding: 0.7rem 0; overflow: hidden;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .ticker-inner {
-      display: flex; gap: 4rem;
-      animation: ticker 20s linear infinite;
-      white-space: nowrap;
-    }
-
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .ticker-sep { color: var(--gray); }
+    .ticker-sep { color: var(--gray); } /* kept for reference, ticker removed */
 
     /* ─── RESEARCH PAGE ─── */
     .page-header {
@@ -707,6 +693,66 @@
     }
     .cv-note strong { color: var(--black); }
 
+    /* ─── AWARDS LIST ─── */
+    .awards-list { margin-bottom: 2rem; }
+    .award-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex; flex-direction: column; gap: 0.15rem;
+    }
+    .award-name {
+      font-size: 0.82rem; font-weight: 500;
+    }
+    .award-meta {
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--gray); letter-spacing: 0.05em;
+    }
+
+    /* ─── FEYNMAN DIAGRAM (hero decoration) ─── */
+    .feynman {
+      position: absolute;
+      bottom: 2.5rem; right: 2.5rem;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    /* ─── NOW BANNER ─── */
+    .now-banner {
+      margin: 2rem 3rem 0;
+      border: 1.5px solid var(--black);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: var(--black); color: var(--white);
+    }
+    .now-pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; flex-shrink: 0; margin-top: 0.35rem;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+    .now-label {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #aaa; margin-bottom: 0.3rem;
+    }
+    .now-text {
+      font-size: 0.85rem; line-height: 1.5; color: var(--white);
+    }
+    .now-text strong { font-weight: 600; }
+
+    /* timeline now marker */
+    .timeline-item.timeline-now .timeline-year {
+      color: var(--black); font-weight: 500;
+    }
+    .timeline-item.timeline-now .timeline-content h4::before {
+      content: "● ";
+      font-size: 0.5rem;
+      vertical-align: middle;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
@@ -732,7 +778,27 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-logo" onclick="showPage('home')">AB</a>
+  <a href="#" class="nav-logo" onclick="showPage('home')">
+    <!-- tiny proton-proton collision: two circles rushing together with spark lines -->
+    <svg viewBox="0 0 36 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- left proton -->
+      <circle cx="5" cy="9" r="4" fill="#0a0a0a"/>
+      <!-- right proton -->
+      <circle cx="31" cy="9" r="4" fill="#0a0a0a"/>
+      <!-- motion trail left -->
+      <line x1="10" y1="9" x2="15" y2="9" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+      <!-- motion trail right -->
+      <line x1="26" y1="9" x2="21" y2="9" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+      <!-- collision sparks at centre -->
+      <line x1="18" y1="4" x2="18" y2="1" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round"/>
+      <line x1="18" y1="14" x2="18" y2="17" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round"/>
+      <line x1="14" y1="6" x2="12" y2="4" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round"/>
+      <line x1="22" y1="6" x2="24" y2="4" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round"/>
+      <line x1="14" y1="12" x2="12" y2="14" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round"/>
+      <line x1="22" y1="12" x2="24" y2="14" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">AB</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#" onclick="showPage('home')" data-page="home" class="active">Index</a></li>
     <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
@@ -756,8 +822,31 @@
         </h1>
       </div>
       <div class="hero-desc">
-        <p>BSc Physics, St. Xavier's College — Tribhuvan University. 2nd Year Class Topper (81.08%). Working on plasma simulations, mountain snow dynamics, and high-energy particle physics.</p>
+        <p>BSc Physics (4th Year), St. Xavier's College — Tribhuvan University. 2nd Year Class Topper (81.08%). Working on high-energy physics, plasma simulations, and CERN-affiliated research.</p>
       </div>
+
+      <!-- e+e- → γ → μ+μ- Feynman diagram, ghosted watermark -->
+      <svg class="feynman" width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- incoming e- (top-left → vertex) -->
+        <line x1="10" y1="20" x2="90" y2="70" stroke="#0a0a0a" stroke-width="2"/>
+        <text x="5" y="16" font-size="11" font-family="Georgia" fill="#0a0a0a">e⁻</text>
+        <!-- incoming e+ (bottom-left → vertex) -->
+        <line x1="10" y1="120" x2="90" y2="70" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="5" y="133" font-size="11" font-family="Georgia" fill="#0a0a0a">e⁺</text>
+        <!-- photon propagator (wavy, approximated with path) -->
+        <path d="M90,70 Q100,60 110,70 Q120,80 130,70 Q140,60 150,70 Q160,80 170,70" stroke="#0a0a0a" stroke-width="1.8" fill="none"/>
+        <text x="118" y="58" font-size="10" font-family="Georgia" fill="#0a0a0a">γ</text>
+        <!-- outgoing μ- (vertex → top-right) — but vertex is at x=170 from propagator end -->
+        <!-- second vertex at (170,70) -->
+        <circle cx="90" cy="70" r="3" fill="#0a0a0a"/>
+        <circle cx="170" cy="70" r="3" fill="#0a0a0a"/>
+        <!-- μ- out top-right -->
+        <line x1="170" y1="70" x2="175" y2="20" stroke="#0a0a0a" stroke-width="2"/>
+        <text x="168" y="16" font-size="11" font-family="Georgia" fill="#0a0a0a">μ⁻</text>
+        <!-- μ+ out bottom-right -->
+        <line x1="170" y1="70" x2="175" y2="120" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="168" y="133" font-size="11" font-family="Georgia" fill="#0a0a0a">μ⁺</text>
+      </svg>
     </div>
     <div class="hero-right">
       <div class="hero-stats">
@@ -766,8 +855,8 @@
           <div class="stat-label">2nd Year Score<br>Class Topper</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">2</div>
-          <div class="stat-label">Active Research<br>Projects</div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Research Projects<br>1 Active · 2 Done</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">6+</div>
@@ -781,57 +870,49 @@
 
       <!-- ══ RESEARCH HIGHLIGHTS ══ -->
       <div class="home-research">
-        <p class="home-research-label">Selected Research</p>
+        <p class="home-research-label">Research — 1 Active · 2 Completed</p>
         <div class="home-research-item">
           <span class="home-research-dot active-dot"></span>
           <div>
+            <span class="home-research-title">Final Year Thesis — High Energy Physics (CERN)</span>
+            <span class="home-research-meta">Active · CERN Computing Access · U. Washington Affiliation</span>
+          </div>
+        </div>
+        <div class="home-research-item">
+          <span class="home-research-dot"></span>
+          <div>
             <span class="home-research-title">Kinetic Trajectory Simulation of Dusty Plasma</span>
-            <span class="home-research-meta">Active · Plasma Physics · MATLAB</span>
+            <span class="home-research-meta">Completed · Plasma Physics · MATLAB</span>
           </div>
         </div>
         <div class="home-research-item">
           <span class="home-research-dot"></span>
           <div>
             <span class="home-research-title">Mathematical Modeling of Snow Mountain Dynamics</span>
-            <span class="home-research-meta">2025 · Applied Math · Python</span>
-          </div>
-        </div>
-        <div class="home-research-item">
-          <span class="home-research-dot"></span>
-          <div>
-            <span class="home-research-title">Higgs Invariant Mass — ATLAS Open Data</span>
-            <span class="home-research-meta">HEP · ROOT · RDataFrame</span>
+            <span class="home-research-meta">Completed · Applied Math · Python</span>
           </div>
         </div>
       </div>
 
       <div class="hero-links">
         <a href="https://github.com/AshRay-web/" target="_blank" class="btn btn-black">GitHub ↗</a>
-        <a href="https://www.ashray-web.github.io" target="_blank" class="btn btn-outline">Website ↗</a>
+        <a href="https://www.youtube.com/@aasharyabhandari271" target="_blank" class="btn btn-outline">YouTube ↗</a>
         <a href="mailto:bhandariaasharya@gmail.com" class="btn btn-outline">Email ↗</a>
       </div>
     </div>
   </div>
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span>Dusty Plasma Simulation</span><span class="ticker-sep">·</span>
-      <span>High Energy Physics</span><span class="ticker-sep">·</span>
-      <span>ATLAS Open Data</span><span class="ticker-sep">·</span>
-      <span>Higgs Boson</span><span class="ticker-sep">·</span>
-      <span>Quantum Computing</span><span class="ticker-sep">·</span>
-      <span>General Relativity</span><span class="ticker-sep">·</span>
-      <span>MATLAB · Python · ROOT</span><span class="ticker-sep">·</span>
-      <span>Pythia · Geant4</span><span class="ticker-sep">·</span>
-      <span>Dusty Plasma Simulation</span><span class="ticker-sep">·</span>
-      <span>High Energy Physics</span><span class="ticker-sep">·</span>
-      <span>ATLAS Open Data</span><span class="ticker-sep">·</span>
-      <span>Higgs Boson</span><span class="ticker-sep">·</span>
-      <span>Quantum Computing</span><span class="ticker-sep">·</span>
-      <span>General Relativity</span><span class="ticker-sep">·</span>
-      <span>MATLAB · Python · ROOT</span><span class="ticker-sep">·</span>
-      <span>Pythia · Geant4</span><span class="ticker-sep">·</span>
+
+  <!-- ══ NOW BANNER ══ -->
+  <div class="now-banner">
+    <div class="now-pulse"></div>
+    <div>
+      <div class="now-label">Currently</div>
+      <p class="now-text">
+        <strong>4th Year BSc Physics</strong> — working on my <strong>HEP thesis with CERN computing access</strong>, affiliated with the University of Washington. Recently completed the <strong>ATLAS Software Workshop</strong> on physics object reconstruction and analysis.
+      </p>
     </div>
   </div>
+
   <footer>
     <span class="footer-name">© 2025 Aasharya Bhandari</span>
     <div class="footer-links">
@@ -853,10 +934,10 @@
   <div class="about-grid">
     <div class="about-left">
       <p class="about-bio">
-        I'm Aasharya — a physics student obsessed with understanding how the universe works at its most fundamental level. My interests span <em>plasma physics, high-energy particle physics,</em> and the beautiful mathematics underneath it all.
+        I'm Aasharya — a physics student obsessed with understanding how the universe works at its most fundamental level. My primary interest is <em>high-energy particle physics</em> — colliders, detectors, and the mathematics of fundamental interactions.
       </p>
       <p class="about-bio" style="font-size:1rem; font-family: var(--sans); color: #555; line-height: 1.8;">
-        Currently in my second year at St. Xavier's College under Tribhuvan University, Kathmandu. I work on kinetic trajectory simulations of dusty plasma under Dr. Roshan Chalise, and mathematical modeling of snow-mountain dynamics at Phutung Research Institute. I also make educational physics videos on YouTube and write notes on complex topics.
+        Currently in my <strong>4th year</strong> at St. Xavier's College, Tribhuvan University, Kathmandu. I have CERN computing access as an external applicant affiliated with the University of Washington, where I am working on my final year HEP thesis. I also make educational physics videos on YouTube.
       </p>
 
       <div class="skills-section">
@@ -883,21 +964,55 @@
           <span class="skill-chip">Linux</span>
           <span class="skill-chip">Git / GitHub</span>
         </div>
+
+        <h3>Awards & Scholarships</h3>
+        <div class="awards-list">
+          <div class="award-item">
+            <span class="award-name">Locke &amp; Stiller Research Award (LSRA)</span>
+            <span class="award-meta">St. Xavier's College · 2025</span>
+          </div>
+          <div class="award-item">
+            <span class="award-name">Academic Merit Scholarship</span>
+            <span class="award-meta">St. Xavier's College · 2023, 2024</span>
+          </div>
+          <div class="award-item">
+            <span class="award-name">Academic Excellence Scholarship</span>
+            <span class="award-meta">New Horizon Institute · 2020–2022</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="about-right">
       <h3 style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:1rem;">Timeline</h3>
       <div class="timeline">
+        <!-- ── ADD NEW TIMELINE ITEMS AT THE TOP (most recent first) ── -->
+
+        <div class="timeline-item timeline-now">
+          <div class="timeline-year">2026 – now</div>
+          <div class="timeline-content">
+            <h4>Final Year HEP Thesis — CERN Computing Access</h4>
+            <p>Working on High Energy Physics project with CERN computing access. External applicant affiliated with University of Washington.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item timeline-now">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-content">
+            <h4>ATLAS Software Workshop</h4>
+            <p>Completed workshop on ATLAS software framework. Physics object reconstruction and analysis — jets, electrons, muons, missing ET.</p>
+          </div>
+        </div>
+
         <div class="timeline-item">
-          <div class="timeline-year">2025 – now</div>
+          <div class="timeline-year">2025</div>
           <div class="timeline-content">
             <h4>Research Intern — Phutung Research Institute</h4>
             <p>Mathematical modeling of snow accumulation and melting on mountainous terrain. Python-based numerical solvers.</p>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">2025 – now</div>
+          <div class="timeline-year">2025–2026</div>
           <div class="timeline-content">
             <h4>Research — Dusty Plasma (St. Xavier's College)</h4>
             <p>Kinetic Trajectory Simulation with OML theory. Modified Bohm sheath criterion. Supervisor: Dr. Roshan Chalise.</p>
@@ -927,8 +1042,8 @@
         <div class="timeline-item">
           <div class="timeline-year">2022 – now</div>
           <div class="timeline-content">
-            <h4>BSc Physics — St. Xavier's College, TU</h4>
-            <p>Top of class, 2nd year: 81.08%. Merit scholarship holder.</p>
+            <h4>BSc Physics (4th Year) — St. Xavier's College, TU</h4>
+            <p>2nd year top of class: 81.08%. Merit scholarship holder.</p>
           </div>
         </div>
       </div>
@@ -946,41 +1061,62 @@
 <div id="research" class="page">
   <div class="page-header">
     <div>
-      <p class="page-subtitle">Active & completed</p>
+      <p class="page-subtitle">1 Active · 2 Completed</p>
       <h2 class="page-title">RESEARCH</h2>
     </div>
-    <span class="page-count">02 projects</span>
+    <span class="page-count">03 projects</span>
   </div>
   <div class="research-grid">
+
+    <!-- ── CARD 01: ACTIVE — CERN HEP THESIS ── -->
     <div class="research-card">
       <p class="research-num">01</p>
       <div class="research-meta">
         <span class="tag active-tag">Active</span>
+        <span class="tag">High Energy Physics</span>
+        <span class="tag">CERN</span>
+      </div>
+      <h3 class="research-title">Final Year Thesis — High Energy Physics</h3>
+      <p class="research-desc">
+        Working on a High Energy Physics project as my final year BSc thesis. CERN computing access granted as an external applicant with affiliation to the University of Washington. Project details to be updated as work progresses. Recently completed the ATLAS Software Workshop covering physics object reconstruction and analysis.
+      </p>
+      <!-- UPDATE: add supervisor name and specific project details when confirmed -->
+      <p class="research-supervisor">Affiliation: University of Washington · CERN Computing Access</p>
+      <p class="research-supervisor" style="margin-top:0.25rem;">2026 – Present</p>
+    </div>
+
+    <!-- ── CARD 02: COMPLETED ── -->
+    <div class="research-card">
+      <p class="research-num">02</p>
+      <div class="research-meta">
+        <span class="tag">Completed</span>
         <span class="tag">Plasma Physics</span>
         <span class="tag">MATLAB</span>
       </div>
       <h3 class="research-title">Kinetic Trajectory Simulation of Dusty Plasma</h3>
       <p class="research-desc">
-        Computing the modified Bohm sheath criterion for dusty plasma and developing MATLAB code to incorporate Orbital Motion Limited (OML) theory. Studying variations in plasma density, particle behavior, and electric potential — comparing trajectories with and without dust particles to showcase the importance of dust effects in KTS modeling.
+        Computed the modified Bohm sheath criterion for dusty plasma and developed MATLAB code incorporating Orbital Motion Limited (OML) theory. Studied variations in plasma density, particle behavior, and electric potential — comparing trajectories with and without dust particles to showcase the importance of dust effects in KTS modeling.
       </p>
       <p class="research-supervisor">Supervisor: Dr. Roshan Chalise — St. Xavier's College, Kathmandu</p>
-      <p class="research-supervisor" style="margin-top:0.25rem;">May 2025 – Present</p>
+      <p class="research-supervisor" style="margin-top:0.25rem;">2025–2026</p>
     </div>
 
+    <!-- ── CARD 03: COMPLETED ── -->
     <div class="research-card">
-      <p class="research-num">02</p>
+      <p class="research-num">03</p>
       <div class="research-meta">
-        <span class="tag active-tag">Active</span>
+        <span class="tag">Completed</span>
         <span class="tag">Mathematical Modeling</span>
         <span class="tag">Python</span>
       </div>
       <h3 class="research-title">Mathematical Modeling of Snow Mountain Dynamics</h3>
       <p class="research-desc">
-        Developing a steady-state mathematical model for snow accumulation and melting on mountainous terrain. Building a Python-based numerical solver to simulate snow-packed mountain dynamics, parameterizing environmental factors including precipitation rate and solar radiation within the model framework.
+        Developed a steady-state mathematical model for snow accumulation and melting on mountainous terrain. Built a Python-based numerical solver to simulate snow-packed mountain dynamics, parameterizing environmental factors including precipitation rate and solar radiation.
       </p>
       <p class="research-supervisor">Supervisor: Dr. Rijan Maharjan — Phutung Research Institute, Tokha, Kathmandu</p>
       <p class="research-supervisor" style="margin-top:0.25rem;">Aug–Dec 2025</p>
     </div>
+
   </div>
   <footer>
     <span class="footer-name">© 2025 Aasharya Bhandari</span>
@@ -1084,11 +1220,8 @@
       <p class="page-subtitle">YouTube · Educational content</p>
       <h2 class="page-title">LECTURES</h2>
     </div>
-    <!--
-    UPDATE YOUR CHANNEL LINK BELOW:
-    Replace "https://www.youtube.com/@your-channel" with your actual YouTube channel URL
-    -->
-    <a href="https://www.youtube.com/@your-channel" target="_blank" class="btn btn-black" style="margin-bottom:0.5rem;">Channel ↗</a>
+    <!-- UPDATE YOUR CHANNEL LINK: replace with your YouTube channel URL -->
+    <a href="https://www.youtube.com/@aasharyabhandari271" target="_blank" class="btn btn-black" style="margin-bottom:0.5rem;">Channel ↗</a>
   </div>
 
   <!--
@@ -1165,8 +1298,7 @@
 
   <div class="notes-grid" id="notes-grid">
 
-    <!-- ── EXAMPLE NOTE CARD — duplicate this block to add more ── -->
-    <div class="note-card" data-src="notes/example.pdf" data-name="Classical Mechanics" data-desc="Lagrangian & Hamiltonian formulation · SXC">
+    <div class="note-card" data-src="notes/NoteExample.pdf" data-name="Classical Mechanics" data-desc="Lagrangian & Hamiltonian formulation · SXC">
       <span class="note-icon">📄</span>
       <div class="note-name">Classical Mechanics</div>
       <div class="note-size">Lagrangian & Hamiltonian · SXC</div>
@@ -1213,7 +1345,7 @@
         <p>CV_AasharyaBhandari.pdf · Updated 2025</p>
       </div>
       <!-- UPDATE href to match your PDF filename -->
-      <a href="CV_AasharyaBhandari.pdf" download class="btn btn-black">Download ↓</a>
+      <a href="MYCV!.pdf" download class="btn btn-black">Download ↓</a>
     </div>
 
     <div class="cv-note">
